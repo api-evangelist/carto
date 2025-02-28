@@ -58,3 +58,44 @@ common:
     description: 'null'
     url: https://docs.carto.com/getting-started/quickstart-guides
     type: GettingStarted
+  - name: CARTO Accounts
+    description: 'null'
+    url: >-
+      https://auth.carto.com/u/login?state=hKFo2SB4NUo4Z3owMUZRVHhvSjJzQTNzUlNkYzB4MFBMRmxwbqFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIDAwZDZUMF9RdVV2Y2hQeVlxdFpRVW1XTFJxNXRZZHB2o2NpZNkgakNXbkhLNkUySzJhT3k5akx5M083Wk1waHFHTzlCUEw
+    type: Login
+  - name: CARTO Accounts
+    description: 'null'
+    url: https://auth.carto.com/u/signup
+    type: SignUp
+  - name: Support Packages | CARTO Documentation
+    description: 'null'
+    url: https://docs.carto.com/faqs/support-packages
+    type: Support
+  - name: CARTO Blog
+    description: 'null'
+    url: https://carto.com/blog
+    type: Blog
+  - name: Glossary | Definitions & FAQs | CARTO
+    description: 'null'
+    url: https://carto.com/glossary
+    type: Glossary
+  - name: Location Intelligence and Big Data Webinars | CARTO
+    description: 'null'
+    url: https://carto.com/webinars
+    type: Webinars
+  - name: Partner Network | CARTO
+    description: 'null'
+    url: https://carto.com/partners
+    type: Partners
+  - name: Pricing
+    description: 'null'
+    url: https://carto.com/pricing
+    type: Pricing
+  - name: Legal | CARTO
+    description: 'null'
+    url: https://carto.com/legal
+    type: TermsOfService
+  - name: Privacy Notice | CARTO
+    description: 'null'
+    url: https://carto.com/privacy
+    type: PrivacyPolicy
