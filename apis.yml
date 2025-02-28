@@ -41,3 +41,20 @@ maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
 specificationVersion: '0.19'
+common:
+  - name: Welcome | CARTO Documentation
+    description: 'null'
+    url: https://docs.carto.com/
+    type: Portal
+  - name: Whats new | CARTO Documentation
+    description: 'null'
+    url: https://docs.carto.com/whats-new
+    type: ' WhatsNew'
+  - name: FAQs | CARTO Documentation
+    description: 'null'
+    url: https://docs.carto.com/faqs
+    type: FAQ
+  - name: Quickstart guides | CARTO Documentation
+    description: 'null'
+    url: https://docs.carto.com/getting-started/quickstart-guides
+    type: GettingStarted
