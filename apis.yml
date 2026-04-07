@@ -26,17 +26,12 @@ created: '2025-01-08'
 modified: '2025-02-27'
 position: Consumer
 description: >-
-  Carto is a location intelligence platform that allows users to analyze and
-  visualize spatial data in order to gain insights into their business or
-  research. With Carto, users can upload their own geographic datasets, connect
-  to existing data sources, and create interactive maps and visualizations. The
-  platform offers a wide range of tools for spatial analysis, data
-  visualization, and geospatial modeling, making it easy for users to explore
-  and understand their data in a geographic context. Additionally, Carto allows
-  users to share their maps and insights with others through interactive
-  dashboards and embeddable visualizations. Overall, Carto helps users harness
-  the power of spatial data to make informed decisions and solve complex
-  problems.
+  Carto is a location intelligence platform that allows users to analyze and visualize
+  spatial data in order to gain insights into their business or research. With Carto,
+  users can upload their own geographic datasets, connect to existing data sources,
+  and create interactive maps and visualizations. The platform offers a wide range
+  of tools for spatial analysis, data visualization, and geospatial modeling, making
+  it easy for users to explore and understand their data in a geographic context.
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
