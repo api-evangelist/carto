@@ -4,8 +4,7 @@ url: >-
 apis:
   - aid: carto:carto
     name: Carto
-    tags:
-      - API
+    tags: []
     humanURL: https://api-docs.carto.com/
     properties:
       - url: https://api-docs.carto.com/
@@ -16,8 +15,8 @@ apis:
       ...
 name: Carto
 tags:
-  - Geospatial
   - Geographic
+  - Geospatial
   - Mapping
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
