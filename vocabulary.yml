@@ -1,0 +1,70 @@
+vocabulary: carto
+description: >-
+  Controlled vocabulary for the CARTO location intelligence platform. Defines
+  the spatial concepts (maps, tilesets, sources, workflows, datasets) used
+  across CARTO's Maps, SQL, Workflows, Import, and Data Observatory APIs.
+version: '1.0.0'
+concepts:
+  - term: Map
+    definition: >-
+      A CARTO map composed of one or more layers, each bound to a source
+      (table, tileset, or SQL query) against a connected data warehouse.
+  - term: Layer
+    definition: >-
+      A single visual layer in a map rendered from a source, styled by
+      properties such as color, stroke, size, and filtering.
+  - term: Source
+    definition: >-
+      A data reference for a layer — a vector table source, query source,
+      tileset source, H3 source, quadbin source, raster source, or boundary
+      source.
+  - term: Tileset
+    definition: >-
+      A pre-computed tiled representation of a dataset (vector, raster, H3,
+      quadbin) served via the Maps API for efficient web rendering.
+  - term: H3Index
+    definition: >-
+      A hexagonal spatial index cell identifier used for aggregated spatial
+      analytics (via Uber H3).
+  - term: QuadbinIndex
+    definition: >-
+      A quadbin spatial index used for aggregated spatial analytics (tiled
+      quadkey system).
+  - term: Workflow
+    definition: >-
+      A visually-designed CARTO pipeline of spatial operations executed
+      against a connected data warehouse.
+  - term: Widget
+    definition: >-
+      A data-driven UI component (formula, categories, histogram, range,
+      scatter, time series, table) bound to a CARTO source with optional
+      column and spatial filters.
+  - term: DataObservatoryDataset
+    definition: >-
+      A curated third-party dataset available for subscription in the CARTO
+      Data Observatory catalog.
+  - term: Connection
+    definition: >-
+      A credentialed link from CARTO to a data warehouse (BigQuery,
+      Snowflake, Redshift, Databricks, PostgreSQL).
+  - term: APIAccessToken
+    definition: >-
+      A scoped, short- or long-lived token used for programmatic access to
+      CARTO APIs.
+  - term: OAuthClient
+    definition: >-
+      A registered OAuth 2.0 client used for user-authorized access to CARTO
+      APIs.
+mappings:
+  - term: Map
+    schema_org: schema:Map
+  - term: Layer
+    schema_org: schema:Dataset
+  - term: Tileset
+    schema_org: schema:Dataset
+  - term: Workflow
+    schema_org: schema:HowTo
+  - term: Widget
+    schema_org: schema:WebApplication
+  - term: DataObservatoryDataset
+    schema_org: schema:Dataset

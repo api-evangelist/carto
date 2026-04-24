@@ -1,0 +1,132 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "carto": "https://carto.com/vocab#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "geo": "http://www.opengis.net/ont/geosparql#",
+
+    "Map": {
+      "@id": "schema:Map",
+      "@context": {
+        "mapId": "schema:identifier",
+        "name": "schema:name",
+        "description": "schema:description",
+        "layers": {
+          "@id": "carto:layers",
+          "@container": "@list"
+        },
+        "createdAt": {
+          "@id": "schema:dateCreated",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Layer": {
+      "@id": "carto:Layer",
+      "@context": {
+        "layerId": "schema:identifier",
+        "source": {
+          "@id": "carto:source",
+          "@type": "@id"
+        },
+        "type": "carto:layerType",
+        "style": "carto:style"
+      }
+    },
+
+    "Source": {
+      "@id": "carto:Source",
+      "@context": {
+        "sourceId": "schema:identifier",
+        "sourceType": "carto:sourceType",
+        "connection": {
+          "@id": "carto:connection",
+          "@type": "@id"
+        },
+        "table": "carto:tableRef",
+        "query": "carto:query"
+      }
+    },
+
+    "Tileset": {
+      "@id": "carto:Tileset",
+      "@context": {
+        "tilesetId": "schema:identifier",
+        "tilesetType": "carto:tilesetType",
+        "minZoom": {
+          "@id": "carto:minZoom",
+          "@type": "xsd:integer"
+        },
+        "maxZoom": {
+          "@id": "carto:maxZoom",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "Workflow": {
+      "@id": "schema:HowTo",
+      "@context": {
+        "workflowId": "schema:identifier",
+        "name": "schema:name",
+        "connection": {
+          "@id": "carto:connection",
+          "@type": "@id"
+        },
+        "lastRun": {
+          "@id": "carto:lastRun",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Widget": {
+      "@id": "schema:WebApplication",
+      "@context": {
+        "widgetId": "schema:identifier",
+        "widgetType": "carto:widgetType",
+        "source": {
+          "@id": "carto:source",
+          "@type": "@id"
+        },
+        "column": "carto:column"
+      }
+    },
+
+    "DataObservatoryDataset": {
+      "@id": "schema:Dataset",
+      "@context": {
+        "datasetId": "schema:identifier",
+        "publisher": "schema:publisher",
+        "category": "schema:category",
+        "coverage": "schema:spatialCoverage"
+      }
+    },
+
+    "Connection": {
+      "@id": "carto:Connection",
+      "@context": {
+        "connectionId": "schema:identifier",
+        "provider": "schema:provider",
+        "databaseName": "carto:databaseName"
+      }
+    },
+
+    "APIAccessToken": {
+      "@id": "carto:APIAccessToken",
+      "@context": {
+        "tokenId": "schema:identifier",
+        "scopes": {
+          "@id": "carto:scopes",
+          "@container": "@list"
+        },
+        "expiresAt": {
+          "@id": "schema:expires",
+          "@type": "xsd:dateTime"
+        }
+      }
+    }
+  }
+}
