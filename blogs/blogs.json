@@ -1,0 +1,13 @@
+{
+  "repo": "carto",
+  "feeds": [
+    {
+      "source": "https://carto.com/blog",
+      "feed_url": "https://carto.com/blog/index.xml",
+      "saved": 10,
+      "title": "CARTO Blog - Spatial Analytics & Location Intelligence"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:24:58Z"
+}
