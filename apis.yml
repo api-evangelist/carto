@@ -189,6 +189,15 @@ common:
     url: https://carto.com/privacy
   - type: GitHubOrg
     url: https://github.com/CartoDB
+  - type: Integrations
+    url: https://carto.com/integrations/index.html
+integrations:
+  - name: CARTO
+  - name: carto-logo
+  - name: youtube
+  - name: facebook
+  - name: twitter
+  - name: linkedin
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
