@@ -177,7 +177,7 @@ common:
     url: https://carto.com/pricing
   - type: Support
     url: https://docs.carto.com/faqs/support-packages
-  - type: Status
+  - type: StatusPage
     url: https://status.carto.com
   - type: Login
     url: https://auth.carto.com/u/login
