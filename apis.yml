@@ -149,6 +149,8 @@ apis:
       - type: Documentation
         url: https://docs.carto.com/carto-for-developers/carto-for-react
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/carto
   - type: Website
     url: https://carto.com
   - type: Portal
