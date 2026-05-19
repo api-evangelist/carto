@@ -23,7 +23,7 @@ tags:
   - Snowflake
   - Data Warehouse
 created: '2025-01-08'
-modified: '2026-04-23'
+modified: '2026-05-19'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/carto/refs/heads/main/apis.yml
 specificationVersion: '0.19'
@@ -191,6 +191,9 @@ common:
     url: https://github.com/CartoDB
   - type: Integrations
     url: https://carto.com/integrations/index.html
+  - name: MCP Server
+    url: https://carto.com/blog/carto-mcp-server-turn-your-ai-agents-into-geospatial-experts/
+    type: MCPServer
 integrations:
   - name: CARTO
   - name: carto-logo
