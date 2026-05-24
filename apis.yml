@@ -196,6 +196,8 @@ common:
   - name: MCP Server
     url: https://carto.com/blog/carto-mcp-server-turn-your-ai-agents-into-geospatial-experts/
     type: MCPServer
+  - type: LLMsTxt
+    url: https://docs.carto.com/llms.txt
 integrations:
   - name: CARTO
   - name: carto-logo
