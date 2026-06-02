@@ -2,12 +2,20 @@
   "repo": "carto",
   "feeds": [
     {
-      "source": "https://carto.com/blog",
+      "source": "https://carto.com/blog/index.xml",
       "feed_url": "https://carto.com/blog/index.xml",
-      "title": "CARTO Blog - Spatial Analytics & Location Intelligence",
-      "saved": 45
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://carto.com/webinars",
+      "feed_url": "https://carto.com/webinars/index.xml",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
     }
   ],
-  "post_count": 56,
-  "fetched": "2026-05-17T20:20:35Z"
+  "post_count": 61,
+  "fetched": "2026-06-01T23:35:02Z"
 }
