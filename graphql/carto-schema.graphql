@@ -1,0 +1,899 @@
+"""
+CARTO GraphQL Schema
+Conceptual schema modelling the CARTO location intelligence and spatial analytics platform.
+Source: https://docs.carto.com/apis/
+"""
+
+# ---------------------------------------------------------------------------
+# Scalars
+# ---------------------------------------------------------------------------
+
+scalar JSON
+scalar DateTime
+scalar Float64
+
+# ---------------------------------------------------------------------------
+# Enums
+# ---------------------------------------------------------------------------
+
+enum GeometryType {
+  POINT
+  LINESTRING
+  POLYGON
+  MULTIPOINT
+  MULTILINESTRING
+  MULTIPOLYGON
+  GEOMETRYCOLLECTION
+}
+
+enum LayerType {
+  VECTOR
+  RASTER
+  H3
+  QUADBIN
+  TILESET
+  HEATMAP
+  CLUSTER
+}
+
+enum AnalysisType {
+  BUFFER
+  INTERSECTION
+  UNION
+  DIFFERENCE
+  CENTROID
+  CONVEX_HULL
+  DISSOLVE
+  SPATIAL_JOIN
+  ISOCHRONE
+  ROUTING
+  GEOCODING
+}
+
+enum ImportStatus {
+  PENDING
+  UPLOADING
+  PROCESSING
+  COMPLETE
+  FAILED
+  CANCELLED
+}
+
+enum UserRole {
+  OWNER
+  ADMIN
+  EDITOR
+  VIEWER
+  BUILDER
+}
+
+enum ColumnType {
+  STRING
+  INTEGER
+  FLOAT
+  BOOLEAN
+  DATE
+  DATETIME
+  GEOMETRY
+  JSON
+  ARRAY
+  BYTES
+}
+
+enum PermissionLevel {
+  READ
+  WRITE
+  ADMIN
+  NONE
+}
+
+enum TokenType {
+  OAUTH
+  API_KEY
+  REGULAR
+  MASTER
+}
+
+enum TileFormat {
+  MVT
+  TILEJSON
+  XYZ
+  RASTER
+}
+
+# ---------------------------------------------------------------------------
+# Geometry Types
+# ---------------------------------------------------------------------------
+
+"""A single geographic coordinate [longitude, latitude]."""
+type Coordinate {
+  longitude: Float!
+  latitude: Float!
+  altitude: Float
+}
+
+"""An axis-aligned bounding box expressed as [west, south, east, north]."""
+type BoundingBox {
+  west: Float!
+  south: Float!
+  east: Float!
+  north: Float!
+}
+
+"""A GeoJSON Point geometry."""
+type Point {
+  type: String!
+  coordinates: [Float!]!
+}
+
+"""A GeoJSON LineString geometry."""
+type LineString {
+  type: String!
+  coordinates: [[Float!]!]!
+}
+
+"""A GeoJSON Polygon geometry (first ring is exterior, rest are holes)."""
+type Polygon {
+  type: String!
+  coordinates: [[[Float!]!]!]!
+}
+
+"""A GeoJSON MultiPoint geometry."""
+type MultiPoint {
+  type: String!
+  coordinates: [[Float!]!]!
+}
+
+"""A GeoJSON MultiLineString geometry."""
+type MultiLineString {
+  type: String!
+  coordinates: [[[Float!]!]!]!
+}
+
+"""A GeoJSON MultiPolygon geometry."""
+type MultiPolygon {
+  type: String!
+  coordinates: [[[[Float!]!]!]!]!
+}
+
+"""A GeoJSON GeometryCollection."""
+type GeometryCollection {
+  type: String!
+  geometries: [Geometry!]!
+}
+
+"""Union of all supported GeoJSON geometry types."""
+union Geometry =
+    Point
+  | LineString
+  | Polygon
+  | MultiPoint
+  | MultiLineString
+  | MultiPolygon
+  | GeometryCollection
+
+# ---------------------------------------------------------------------------
+# Features
+# ---------------------------------------------------------------------------
+
+"""A GeoJSON Feature with arbitrary properties."""
+type Feature {
+  type: String!
+  id: ID
+  geometry: Geometry
+  properties: JSON
+}
+
+"""Extended details for a single Feature including data-warehouse metadata."""
+type FeatureDetails {
+  type: String!
+  id: ID
+  geometry: Geometry
+  properties: JSON
+  datasetId: String
+  tableId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""A GeoJSON FeatureCollection."""
+type FeatureCollection {
+  type: String!
+  features: [Feature!]!
+  totalCount: Int
+  bbox: BoundingBox
+}
+
+# ---------------------------------------------------------------------------
+# Dataset & Schema Types
+# ---------------------------------------------------------------------------
+
+"""A column within a dataset or table schema."""
+type Column {
+  name: String!
+  type: ColumnType!
+  nullable: Boolean
+  description: String
+  isGeometry: Boolean
+  geometryType: GeometryType
+  srid: Int
+}
+
+"""The schema (column list) for a dataset or table."""
+type Schema {
+  columns: [Column!]!
+  primaryKey: [String!]
+  geometryColumn: String
+}
+
+"""Lightweight metadata for a CARTO dataset."""
+type DatasetMeta {
+  id: ID!
+  name: String!
+  description: String
+  tags: [String!]
+  createdAt: DateTime
+  updatedAt: DateTime
+  rowCount: Int
+  sizeBytes: Int64
+  privacyLevel: String
+}
+
+"""Summary representation of a dataset."""
+type Dataset {
+  id: ID!
+  name: String!
+  fullName: String
+  description: String
+  tags: [String!]
+  schema: Schema
+  meta: DatasetMeta
+  owner: User
+}
+
+"""Full detail record for a dataset including warehouse connection info."""
+type DatasetDetails {
+  id: ID!
+  name: String!
+  fullName: String
+  description: String
+  tags: [String!]
+  schema: Schema
+  meta: DatasetMeta
+  owner: User
+  organization: Organization
+  connectionId: String
+  warehouseType: String
+  projectId: String
+  datasetId: String
+  tableId: String
+  privacyLevel: String
+  bbox: BoundingBox
+  rowCount: Int
+  sizeBytes: Int64
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Table Types
+# ---------------------------------------------------------------------------
+
+"""A database table within a connected data warehouse."""
+type Table {
+  id: ID!
+  name: String!
+  fullName: String
+  schema: TableSchema
+  connectionId: String
+  rowCount: Int
+  sizeBytes: Int64
+}
+
+"""Full detail for a warehouse table."""
+type TableDetails {
+  id: ID!
+  name: String!
+  fullName: String
+  schema: TableSchema
+  connectionId: String
+  projectId: String
+  datasetId: String
+  warehouseType: String
+  rowCount: Int
+  sizeBytes: Int64
+  createdAt: DateTime
+  updatedAt: DateTime
+  bbox: BoundingBox
+}
+
+"""Schema definition for a warehouse table."""
+type TableSchema {
+  columns: [Column!]!
+  primaryKey: [String!]
+  partitionFields: [String!]
+  clusterFields: [String!]
+  geometryColumn: String
+}
+
+# ---------------------------------------------------------------------------
+# Tileset Types
+# ---------------------------------------------------------------------------
+
+"""CartoCSS styling string for vector tiles."""
+type CartoCSS {
+  style: String!
+  version: String
+}
+
+"""Style definition for rendered tiles."""
+type TileStyle {
+  id: ID!
+  name: String
+  cartoCss: CartoCSS
+  mapboxStyle: JSON
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Metadata for a single tile within a tileset."""
+type TileDetails {
+  z: Int!
+  x: Int!
+  y: Int!
+  format: TileFormat
+  sizeBytes: Int
+  features: Int
+}
+
+"""A CARTO tileset — pre-rendered or on-the-fly tiles for a dataset."""
+type TileSet {
+  id: ID!
+  name: String!
+  description: String
+  format: TileFormat
+  minZoom: Int
+  maxZoom: Int
+  bbox: BoundingBox
+  center: Coordinate
+  tileUrl: String
+  attribution: String
+  style: TileStyle
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Layer & Map Types
+# ---------------------------------------------------------------------------
+
+"""Style properties applied to a map layer."""
+type LayerStyle {
+  id: ID!
+  opacity: Float
+  fillColor: String
+  strokeColor: String
+  strokeWidth: Float
+  radius: Float
+  cartoCss: CartoCSS
+  mapboxStyle: JSON
+}
+
+"""Summary of a map layer."""
+type Layer {
+  id: ID!
+  name: String!
+  type: LayerType!
+  visible: Boolean
+  order: Int
+}
+
+"""Full detail for a map layer."""
+type LayerDetails {
+  id: ID!
+  name: String!
+  type: LayerType!
+  visible: Boolean
+  order: Int
+  source: String
+  sqlQuery: String
+  tileSet: TileSet
+  style: LayerStyle
+  interactivity: JSON
+  legend: JSON
+  tooltip: JSON
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""A layer reference within a Map."""
+type MapLayer {
+  layerId: ID!
+  layer: LayerDetails
+  order: Int
+  visible: Boolean
+}
+
+"""Summary of a CARTO map."""
+type Map {
+  id: ID!
+  name: String!
+  description: String
+  thumbnailUrl: String
+  isPublic: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  owner: User
+}
+
+"""Full detail for a CARTO map including all layers."""
+type MapDetails {
+  id: ID!
+  name: String!
+  description: String
+  thumbnailUrl: String
+  isPublic: Boolean
+  shareUrl: String
+  center: Coordinate
+  zoom: Float
+  bearing: Float
+  pitch: Float
+  layers: [MapLayer!]!
+  bbox: BoundingBox
+  createdAt: DateTime
+  updatedAt: DateTime
+  owner: User
+  organization: Organization
+}
+
+# ---------------------------------------------------------------------------
+# Visualization Types
+# ---------------------------------------------------------------------------
+
+"""Summary of a CARTO visualization / Builder map."""
+type Visualization {
+  id: ID!
+  name: String!
+  description: String
+  thumbnailUrl: String
+  isPublic: Boolean
+  mapId: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  owner: User
+}
+
+"""Full detail for a visualization."""
+type VisualizationDetails {
+  id: ID!
+  name: String!
+  description: String
+  thumbnailUrl: String
+  isPublic: Boolean
+  shareUrl: String
+  embedUrl: String
+  mapId: ID
+  map: MapDetails
+  layers: [LayerDetails!]!
+  widgets: JSON
+  filters: JSON
+  bbox: BoundingBox
+  createdAt: DateTime
+  updatedAt: DateTime
+  owner: User
+  organization: Organization
+}
+
+# ---------------------------------------------------------------------------
+# Analysis & Query Types
+# ---------------------------------------------------------------------------
+
+"""A single node in a CARTO analysis workflow graph."""
+type AnalysisNode {
+  id: ID!
+  type: AnalysisType!
+  params: JSON
+  inputNodes: [String!]
+  outputTable: String
+  status: String
+}
+
+"""A complete CARTO analysis workflow."""
+type Analysis {
+  id: ID!
+  name: String!
+  type: AnalysisType!
+  nodes: [AnalysisNode!]!
+  status: String
+  resultTable: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  owner: User
+}
+
+"""A spatial filter or predicate used in a query."""
+type SpatialQuery {
+  geometry: Geometry
+  spatialPredicate: String
+  distance: Float
+  distanceUnit: String
+}
+
+"""A SQL query submitted to the CARTO SQL API."""
+type SQLQuery {
+  id: ID
+  sql: String!
+  connectionId: String
+  format: String
+  params: JSON
+  spatial: SpatialQuery
+}
+
+"""The result of a SQL API query execution."""
+type QueryResult {
+  rows: [JSON!]
+  fields: [Column!]
+  totalRows: Int
+  time: Float
+  featureCollection: FeatureCollection
+  error: String
+}
+
+# ---------------------------------------------------------------------------
+# Import Types
+# ---------------------------------------------------------------------------
+
+"""Summary of a CARTO data import job."""
+type Import {
+  id: ID!
+  state: ImportStatus!
+  progress: Float
+  tableName: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Full detail for an import job."""
+type ImportDetails {
+  id: ID!
+  state: ImportStatus!
+  progress: Float
+  tableName: String
+  connectionId: String
+  sourceUrl: String
+  fileName: String
+  fileSize: Int64
+  format: String
+  rowsImported: Int
+  error: String
+  warnings: [String!]
+  createdAt: DateTime
+  updatedAt: DateTime
+  owner: User
+}
+
+# ---------------------------------------------------------------------------
+# Organization & User Types
+# ---------------------------------------------------------------------------
+
+"""Permission grant on a resource."""
+type Permission {
+  resourceId: ID!
+  resourceType: String!
+  level: PermissionLevel!
+  grantedTo: String
+  grantedAt: DateTime
+}
+
+"""Role assignment for a user within an organization."""
+type UserRole {
+  id: ID!
+  name: String!
+  permissions: [Permission!]
+}
+
+"""Summary of a CARTO user."""
+type User {
+  id: ID!
+  username: String!
+  email: String
+  avatarUrl: String
+  createdAt: DateTime
+}
+
+"""Full detail for a CARTO user."""
+type UserDetails {
+  id: ID!
+  username: String!
+  email: String
+  firstName: String
+  lastName: String
+  avatarUrl: String
+  role: UserRole
+  organization: Organization
+  quotaInBytes: Int64
+  usedQuotaInBytes: Int64
+  lastLoginAt: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Summary of a CARTO organization."""
+type Organization {
+  id: ID!
+  name: String!
+  displayName: String
+  avatarUrl: String
+  createdAt: DateTime
+}
+
+"""Full detail for a CARTO organization."""
+type OrgDetails {
+  id: ID!
+  name: String!
+  displayName: String
+  description: String
+  avatarUrl: String
+  website: String
+  quotaInBytes: Int64
+  usedQuotaInBytes: Int64
+  maxMapViews: Int
+  members: [UserDetails!]
+  seats: Int
+  usedSeats: Int
+  plan: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Authentication Types
+# ---------------------------------------------------------------------------
+
+"""An OAuth 2.0 client registered with CARTO."""
+type OAuth {
+  clientId: String!
+  clientSecret: String
+  redirectUris: [String!]
+  scopes: [String!]
+  grantTypes: [String!]
+  createdAt: DateTime
+}
+
+"""A CARTO API key or regular access token."""
+type APIKey {
+  id: ID!
+  name: String!
+  type: TokenType!
+  token: String
+  grants: JSON
+  createdAt: DateTime
+  expiresAt: DateTime
+}
+
+"""A bearer token used for authenticating CARTO API requests."""
+type Token {
+  accessToken: String!
+  tokenType: String!
+  expiresIn: Int
+  scope: String
+  refreshToken: String
+  issuedAt: DateTime
+}
+
+"""Top-level authentication configuration for a CARTO account."""
+type CartoAuth {
+  oauthClients: [OAuth!]
+  apiKeys: [APIKey!]
+  activeToken: Token
+}
+
+# ---------------------------------------------------------------------------
+# Geocoding & Routing Types
+# ---------------------------------------------------------------------------
+
+"""Input configuration for a geocoding request."""
+type Geocoding {
+  id: ID!
+  address: String
+  city: String
+  state: String
+  country: String
+  postalCode: String
+  provider: String
+  createdAt: DateTime
+}
+
+"""A single geocoding result."""
+type GeocodeResult {
+  id: ID!
+  address: String!
+  formattedAddress: String
+  point: Point
+  confidence: Float
+  matchType: String
+  components: JSON
+}
+
+"""An isoline (isochrone or isodistance) polygon."""
+type Isoline {
+  id: ID!
+  origin: Point!
+  value: Float!
+  unit: String!
+  mode: String
+  polygon: Polygon
+  createdAt: DateTime
+}
+
+"""A single step within a route leg."""
+type RouteStep {
+  instruction: String!
+  distance: Float!
+  duration: Float!
+  geometry: LineString
+}
+
+"""A leg (segment between two waypoints) of a route."""
+type RouteLeg {
+  distance: Float!
+  duration: Float!
+  steps: [RouteStep!]
+  startPoint: Point
+  endPoint: Point
+}
+
+"""A computed route between origin and destination."""
+type Route {
+  id: ID!
+  distance: Float!
+  duration: Float!
+  geometry: LineString
+  legs: [RouteLeg!]!
+  mode: String
+  warnings: [String!]
+}
+
+"""A routing request and its computed result."""
+type Routing {
+  id: ID!
+  origin: Point!
+  destination: Point!
+  waypoints: [Point!]
+  mode: String
+  route: Route
+  createdAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Data Observatory
+# ---------------------------------------------------------------------------
+
+"""A subscription to a CARTO Data Observatory dataset."""
+type DataObservatorySubscription {
+  id: ID!
+  datasetSlug: String!
+  status: String!
+  expiresAt: DateTime
+  createdAt: DateTime
+}
+
+"""A dataset available in the CARTO Data Observatory catalog."""
+type DataObservatory {
+  id: ID!
+  slug: String!
+  name: String!
+  description: String
+  provider: String
+  category: String
+  tags: [String!]
+  geography: String
+  temporalCoverage: String
+  updateFrequency: String
+  license: String
+  sampleUrl: String
+  bbox: BoundingBox
+  schema: Schema
+  subscription: DataObservatorySubscription
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Scalar alias (BigQuery INT64)
+# ---------------------------------------------------------------------------
+scalar Int64
+
+# ---------------------------------------------------------------------------
+# Root Types
+# ---------------------------------------------------------------------------
+
+type Query {
+  # Datasets
+  dataset(id: ID!): DatasetDetails
+  datasets(orgId: ID, tags: [String!], limit: Int, offset: Int): [Dataset!]!
+
+  # Tables
+  table(connectionId: String!, tableId: String!): TableDetails
+  tables(connectionId: String!, datasetId: String, limit: Int): [Table!]!
+
+  # Maps & Visualizations
+  map(id: ID!): MapDetails
+  maps(orgId: ID, limit: Int, offset: Int): [Map!]!
+  visualization(id: ID!): VisualizationDetails
+  visualizations(orgId: ID, limit: Int, offset: Int): [Visualization!]!
+
+  # Layers
+  layer(id: ID!): LayerDetails
+  layers(mapId: ID!): [Layer!]!
+
+  # Tilesets
+  tileset(id: ID!): TileSet
+  tilesets(connectionId: String, limit: Int, offset: Int): [TileSet!]!
+
+  # SQL Analytics
+  executeSQL(query: SQLQuery!): QueryResult
+
+  # Analysis
+  analysis(id: ID!): Analysis
+  analyses(orgId: ID, limit: Int, offset: Int): [Analysis!]!
+
+  # Import
+  importJob(id: ID!): ImportDetails
+  importJobs(orgId: ID, status: ImportStatus, limit: Int, offset: Int): [Import!]!
+
+  # Organization & Users
+  organization(id: ID!): OrgDetails
+  organizations(limit: Int, offset: Int): [Organization!]!
+  user(id: ID!): UserDetails
+  me: UserDetails
+
+  # Auth
+  apiKeys(userId: ID): [APIKey!]!
+  oauthClients(orgId: ID): [OAuth!]!
+  cartoAuth: CartoAuth
+
+  # Geocoding
+  geocode(address: String!, country: String): [GeocodeResult!]!
+  isoline(origin: Point!, value: Float!, unit: String!, mode: String): Isoline
+  route(origin: Point!, destination: Point!, mode: String): Route
+
+  # Data Observatory
+  dataObservatoryDataset(slug: String!): DataObservatory
+  dataObservatorySearch(category: String, tags: [String!], geography: String, limit: Int, offset: Int): [DataObservatory!]!
+}
+
+type Mutation {
+  # Datasets
+  createDataset(name: String!, connectionId: String!, description: String, tags: [String!]): DatasetDetails
+  updateDataset(id: ID!, name: String, description: String, tags: [String!]): DatasetDetails
+  deleteDataset(id: ID!): Boolean
+
+  # Maps & Visualizations
+  createMap(name: String!, description: String, orgId: ID): MapDetails
+  updateMap(id: ID!, name: String, description: String, isPublic: Boolean): MapDetails
+  deleteMap(id: ID!): Boolean
+
+  # Layers
+  addLayer(mapId: ID!, name: String!, type: LayerType!, source: String, sqlQuery: String): LayerDetails
+  updateLayer(id: ID!, name: String, visible: Boolean, style: JSON): LayerDetails
+  removeLayer(id: ID!): Boolean
+
+  # Import
+  createImport(connectionId: String!, sourceUrl: String, tableName: String, format: String): Import
+  cancelImport(id: ID!): Import
+
+  # Analysis
+  runAnalysis(type: AnalysisType!, params: JSON!, connectionId: String!): Analysis
+  deleteAnalysis(id: ID!): Boolean
+
+  # Auth
+  createAPIKey(name: String!, type: TokenType, grants: JSON): APIKey
+  deleteAPIKey(id: ID!): Boolean
+  createOAuthClient(redirectUris: [String!]!, scopes: [String!]): OAuth
+  deleteOAuthClient(clientId: String!): Boolean
+
+  # Data Observatory
+  subscribeToDataset(slug: String!): DataObservatorySubscription
+  unsubscribeFromDataset(slug: String!): Boolean
+}
