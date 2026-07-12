@@ -1,0 +1,35 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: carto.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jan 26 23:59:59 2027 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: docs.carto.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  9 15:36:52 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: gcp-us-east1.api.carto.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 28 13:38:07 2026 GMT
+  hsts: true
+  hsts_max_age: 15552000
+domains:
+- domain: carto.com
+  dnssec: false
+  caa:
+  - 0 issuewild "sectigo.com"
+  - 0 iodef "mailto:security-policy-report@carto.com"
+  - 0 issue "digicert.com"
+  - 0 issue "globalsign.com"
+  - 0 issue "letsencrypt.org"
+  - 0 issue "pki.goog; cansignhttpexchanges=yes"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

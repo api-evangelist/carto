@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/carto-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: CARTO API Access Token (or OAuth M2M token)
+  sources:
+  - openapi/carto-openapi.yml
