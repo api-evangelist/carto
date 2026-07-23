@@ -1,0 +1,105 @@
+openapi: 3.1.0
+info:
+  title: CARTO Platform Jobs SQL API
+  description: CARTO is a cloud-native location intelligence platform. The v3 REST API exposes SQL execution against a connected data warehouse (synchronous query and asynchronous jobs) which also powers workflow execution. The base URL is per-region (for example, https://gcp-us-east1.api.carto.com) and authentication uses an API Access Token obtained from CARTO Workspace.
+  version: '3'
+  contact:
+    name: CARTO Developers
+    url: https://docs.carto.com/carto-for-developers/
+servers:
+- url: https://gcp-us-east1.api.carto.com
+  description: CARTO Cloud US (GCP us-east1)
+- url: https://{tenant}/api
+  description: Self-hosted CARTO tenant
+  variables:
+    tenant:
+      default: your-carto-tenant.example.com
+security:
+- BearerAuth: []
+tags:
+- name: SQL
+paths:
+  /v3/sql/{connection}/query:
+    parameters:
+    - $ref: '#/components/parameters/Connection'
+    get:
+      tags:
+      - SQL
+      summary: Run a synchronous SQL query against a connection
+      operationId: runQuery
+      parameters:
+      - in: query
+        name: q
+        required: true
+        schema:
+          type: string
+        description: The SQL statement to execute
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - geojson
+          - csv
+      - in: query
+        name: filename
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Query result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rows:
+                    type: array
+                    items:
+                      type: object
+                  totalRows:
+                    type: integer
+                  schema:
+                    type: array
+                    items:
+                      type: object
+    post:
+      tags:
+      - SQL
+      summary: Run a synchronous SQL query (POST)
+      operationId: runQueryPost
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - q
+              properties:
+                q:
+                  type: string
+                queryParameters:
+                  type: object
+      responses:
+        '200':
+          description: Query result
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  parameters:
+    Connection:
+      in: path
+      name: connection
+      required: true
+      schema:
+        type: string
+      description: Name of the data warehouse connection configured in CARTO
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: CARTO API Access Token (or OAuth M2M token)
