@@ -8,9 +8,22 @@ description: CARTO is a cloud-native location intelligence platform that lets de
   for curated third-party spatial datasets — all backed by OAuth access tokens and
   API access tokens.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Provider
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/carto.png
 tags:
 - Location Intelligence
 - Geospatial
@@ -27,9 +40,9 @@ specificationVersion: '0.19'
 apis:
 - aid: carto:maps-api
   name: CARTO Maps API
-  description: Serves vector tables, SQL-query-backed tilesets, tileset sources, and
-    raster/H3/quadbin tilesets for visualization in deck.gl, MapLibre, Google Maps,
-    Amazon Location, or Mapbox GL clients.
+  description: >-
+    Serves vector tables, SQL-query-backed tilesets, tileset sources, and raster/H3/quadbin tilesets for
+    visualization in deck.gl, MapLibre, Google Maps, Amazon Location, or Mapbox GL clients.
   humanURL: https://docs.carto.com/carto-for-developers/reference/maps-api-reference
   baseURL: https://gcp-us-east1.api.carto.com
   tags:
@@ -44,9 +57,9 @@ apis:
     type: GraphQL
 - aid: carto:sql-api
   name: CARTO SQL API
-  description: Executes SQL (including CARTO's spatial functions and analytics extensions)
-    against a connected data warehouse from applications, returning GeoJSON / JSON
-    results for spatial analysis, scoring, and dashboarding.
+  description: >-
+    Executes SQL (including CARTO's spatial functions and analytics extensions) against a connected data
+    warehouse from applications, returning GeoJSON / JSON results for spatial analysis, scoring, and dashboarding.
   humanURL: https://docs.carto.com/carto-for-developers/reference/sql-api-reference
   baseURL: https://gcp-us-east1.api.carto.com
   tags:
@@ -58,9 +71,9 @@ apis:
     url: https://docs.carto.com/carto-for-developers/reference/sql-api-reference
 - aid: carto:workflows-api
   name: CARTO Workflows API
-  description: Executes visually-designed CARTO Workflows (spatial data pipelines)
-    programmatically, enabling scheduled, CI-driven, or application- triggered spatial
-    analytics runs.
+  description: >-
+    Executes visually-designed CARTO Workflows (spatial data pipelines) programmatically, enabling scheduled,
+    CI-driven, or application- triggered spatial analytics runs.
   humanURL: https://docs.carto.com/carto-for-developers/reference/workflows-api-reference
   baseURL: https://gcp-us-east1.api.carto.com
   tags:
@@ -72,8 +85,9 @@ apis:
     url: https://docs.carto.com/carto-for-developers/reference/workflows-api-reference
 - aid: carto:import-api
   name: CARTO Import API
-  description: Ingests files and URLs (CSV, GeoJSON, Shapefile, etc.) into a user's
-    connected CARTO data warehouse for downstream spatial analysis and mapping.
+  description: >-
+    Ingests files and URLs (CSV, GeoJSON, Shapefile, etc.) into a user's connected CARTO data warehouse
+    for downstream spatial analysis and mapping.
   humanURL: https://docs.carto.com/carto-for-developers/reference/import-api-reference
   baseURL: https://gcp-us-east1.api.carto.com
   tags:
@@ -85,9 +99,9 @@ apis:
     url: https://docs.carto.com/carto-for-developers/reference/import-api-reference
 - aid: carto:data-observatory
   name: CARTO Data Observatory
-  description: Curated catalog of third-party spatial datasets (demographics, POIs,
-    mobility, financial, environmental) accessible via subscription and queryable
-    directly from the customer's cloud data warehouse.
+  description: >-
+    Curated catalog of third-party spatial datasets (demographics, POIs, mobility, financial, environmental)
+    accessible via subscription and queryable directly from the customer's cloud data warehouse.
   humanURL: https://docs.carto.com/data-observatory
   tags:
   - Data Catalog
@@ -98,8 +112,9 @@ apis:
     url: https://docs.carto.com/data-observatory
 - aid: carto:accounts-api
   name: CARTO Accounts API
-  description: Manages CARTO user accounts, organizations, and API access tokens,
-    including OAuth clients used for secure programmatic access.
+  description: >-
+    Manages CARTO user accounts, organizations, and API access tokens, including OAuth clients used for
+    secure programmatic access.
   humanURL: https://docs.carto.com/carto-for-developers/reference/accounts-api-reference
   baseURL: https://accounts.app.carto.com
   tags:
@@ -111,9 +126,9 @@ apis:
     url: https://docs.carto.com/carto-for-developers/reference/accounts-api-reference
 - aid: carto:deck-gl
   name: CARTO for deck.gl
-  description: Client library providing deck.gl layers for CARTO vector, H3, quadbin,
-    raster, and query sources, simplifying application-layer integration with the
-    Maps API.
+  description: >-
+    Client library providing deck.gl layers for CARTO vector, H3, quadbin, raster, and query sources,
+    simplifying application-layer integration with the Maps API.
   humanURL: https://docs.carto.com/carto-for-developers/carto-for-deck.gl
   tags:
   - SDK
@@ -126,8 +141,9 @@ apis:
     url: https://github.com/CartoDB/deck.gl
 - aid: carto:carto-for-react
   name: CARTO for React
-  description: React library of components and hooks for building CARTO-powered location
-    intelligence applications with widgets, filters, and deck.gl map integration.
+  description: >-
+    React library of components and hooks for building CARTO-powered location intelligence applications
+    with widgets, filters, and deck.gl map integration.
   humanURL: https://docs.carto.com/carto-for-developers/carto-for-react
   tags:
   - SDK
@@ -136,6 +152,26 @@ apis:
   properties:
   - type: Documentation
     url: https://docs.carto.com/carto-for-developers/carto-for-react
+- aid: carto:carto-jobs-api
+  name: Carto Jobs API
+  description: The Jobs API from Carto — 2 operation(s) for jobs.
+  humanURL: https://docs.carto.com/carto-for-developers/reference/maps-api-reference
+  baseURL: https://gcp-us-east1.api.carto.com
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/carto-jobs-api-openapi.yml
+- aid: carto:carto-sql-api
+  name: Carto SQL API
+  description: The SQL API from Carto — 1 operation(s) for sql.
+  humanURL: https://docs.carto.com/carto-for-developers/reference/maps-api-reference
+  baseURL: https://gcp-us-east1.api.carto.com
+  tags:
+  - SQL
+  properties:
+  - type: OpenAPI
+    url: openapi/carto-sql-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/carto-agentic-access.yml
