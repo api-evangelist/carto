@@ -1,0 +1,16 @@
+{
+  "provider": "carto",
+  "sources": [
+    "carto-jobs-api-openapi.yml",
+    "carto-sql-api-openapi.yml"
+  ],
+  "outputs": [
+    "carto-jobs-api-openapi.yml",
+    "carto-sql-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
