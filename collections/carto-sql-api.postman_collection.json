@@ -1,0 +1,286 @@
+{
+  "item": [
+    {
+      "id": "1c089109-d61d-4be1-9c42-2c079283df41",
+      "name": "SQL",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c9f8f581-b55f-4dd5-9b36-cb9b37dc89ac",
+          "name": "Run a synchronous SQL query against a connection",
+          "request": {
+            "name": "Run a synchronous SQL query against a connection",
+            "description": {},
+            "url": {
+              "path": [
+                "v3",
+                "sql",
+                ":connection",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) The SQL statement to execute"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filename",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "connection",
+                  "description": "(Required) Name of the data warehouse connection configured in CARTO"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5cce2b23-5f8d-4422-91d9-cc3f211c8960",
+              "name": "Query result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "sql",
+                    ":connection",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filename",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "connection",
+                      "description": "(Required) Name of the data warehouse connection configured in CARTO"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalRows\": 8715\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99500f06-461d-456b-b5c2-d3ee181b340f",
+          "name": "Run a synchronous SQL query (POST)",
+          "request": {
+            "name": "Run a synchronous SQL query (POST)",
+            "description": {},
+            "url": {
+              "path": [
+                "v3",
+                "sql",
+                ":connection",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "connection",
+                  "description": "(Required) Name of the data warehouse connection configured in CARTO"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"q\": \"<string>\",\n  \"queryParameters\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e0414a2b-12e3-4f9d-97e6-a4c35b20b647",
+              "name": "Query result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "sql",
+                    ":connection",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "connection",
+                      "description": "(Required) Name of the data warehouse connection configured in CARTO"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"q\": \"<string>\",\n  \"queryParameters\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gcp-us-east1.api.carto.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ac71a4d4-7e19-499d-844f-b565b24cb0e4",
+    "name": "CARTO Platform Jobs SQL API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "CARTO is a cloud-native location intelligence platform. The v3 REST API exposes SQL execution against a connected data warehouse (synchronous query and asynchronous jobs) which also powers workflow execution. The base URL is per-region (for example, https://gcp-us-east1.api.carto.com) and authentication uses an API Access Token obtained from CARTO Workspace.\n\nContact Support:\n Name: CARTO Developers",
+      "type": "text/plain"
+    }
+  }
+}

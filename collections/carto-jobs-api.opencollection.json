@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CARTO Platform Jobs API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit an asynchronous SQL job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gcp-us-east1.api.carto.com/v3/sql/:connection/job",
+            "params": [
+              {
+                "name": "connection",
+                "value": "",
+                "type": "path",
+                "description": "Name of the data warehouse connection configured in CARTO"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an asynchronous SQL job"
+        },
+        {
+          "info": {
+            "name": "Check status of an asynchronous SQL job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gcp-us-east1.api.carto.com/v3/sql/:connection/job/:jobId",
+            "params": [
+              {
+                "name": "connection",
+                "value": "",
+                "type": "path",
+                "description": "Name of the data warehouse connection configured in CARTO"
+              },
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Check status of an asynchronous SQL job"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
