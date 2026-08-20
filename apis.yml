@@ -48,6 +48,11 @@ apis:
   tags:
   - Maps
   - Tiles
+  - Vectors
+  - Geospatial
+  tags_raw:
+  - Maps
+  - Tiles
   - Vector
   - Geospatial
   properties:
@@ -118,6 +123,9 @@ apis:
   humanURL: https://docs.carto.com/carto-for-developers/reference/accounts-api-reference
   baseURL: https://accounts.app.carto.com
   tags:
+  - Account
+  - Authentication
+  tags_raw:
   - Accounts
   - Authentication
   - OAuth
@@ -131,6 +139,9 @@ apis:
     simplifying application-layer integration with the Maps API.
   humanURL: https://docs.carto.com/carto-for-developers/carto-for-deck.gl
   tags:
+  - SDK
+  - Client Library
+  tags_raw:
   - SDK
   - deck.gl
   - Client Library
@@ -158,6 +169,8 @@ apis:
   humanURL: https://docs.carto.com/carto-for-developers/reference/maps-api-reference
   baseURL: https://gcp-us-east1.api.carto.com
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
