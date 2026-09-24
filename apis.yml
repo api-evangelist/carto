@@ -75,8 +75,6 @@ apis:
   properties:
   - type: Documentation
     url: https://docs.carto.com/carto-for-developers/reference/maps-api-reference
-  - url: graphql/carto-graphql.md
-    type: GraphQL
 - aid: carto:sql-api
   name: CARTO SQL API
   description: >-
