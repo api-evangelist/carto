@@ -12,7 +12,7 @@
   channel: distribution
   evidence: https://aws.amazon.com/marketplace/seller-profile?id=64781f9c-84bc-4ed6-8ee4-45bed1a97b2d
   source: edge
-  relationship: platform-app
+  relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
 - slug: carto-microsoft-azure-marketplace
@@ -24,6 +24,6 @@
   channel: distribution
   evidence: https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=CARTO
   source: edge
-  relationship: platform-app
+  relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
