@@ -1,0 +1,13 @@
+fetched: '2026-10-14'
+method: fetched
+source: https://docs.carto.com/carto-user-manual/maps/basemaps
+page: https://docs.carto.com/carto-user-manual/maps/basemaps
+file: carto-ogc-1.md
+bytes: 4575
+sha256: 9c8a16ada4d63958b31cddb25214638425a161eaebf665f64852f9cc1bd333b3
+anchor: ogc
+shape: ogc
+shapes_declared: []
+classification: no-compatibility-statement
+quote: null
+note: text extracted from the provider's own page (tags stripped), saved for evidence
