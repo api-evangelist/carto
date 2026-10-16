@@ -53,7 +53,7 @@ edges:
     registered_name: com.carto/carto
     register_id: com.carto/carto
     detected_by: sweep-agent-tools.py
-    detected: '2026-10-14'
+    detected: '2026-10-15'
   mcp_registry:
     servers:
     - com.carto/carto
