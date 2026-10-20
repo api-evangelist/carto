@@ -4,6 +4,8 @@ checked:
 - https://aws.amazon.com/marketplace/
 - https://azuremarketplace.microsoft.com/
 - https://registry.modelcontextprotocol.io/v0/servers
+- https://aws.amazon.com/marketplace/search/results?FULFILLMENT_OPTION_TYPE=DATA_EXCHANGE
+- https://marketplace.databricks.com/
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -53,7 +55,7 @@ edges:
     registered_name: com.carto/carto
     register_id: com.carto/carto
     detected_by: sweep-agent-tools.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   mcp_registry:
     servers:
     - com.carto/carto
@@ -69,3 +71,68 @@ edges:
   - namespace-domain
   detected_by: sweep-agent-tools.py
   first_seen: '2026-10-14'
+- partner_name: Databricks Marketplace
+  partner: databricks
+  partner_match: aggregator
+  type: marketplace
+  marketplace: databricks-marketplace
+  channel: distribution
+  relationship: distribution-channel
+  direction: third-party
+  evidence: https://marketplace.databricks.com/provider/dd56dcf4-cb70-449e-abad-c8038c0de3d9
+  category: data product listing
+  contract_reference:
+    register: Databricks Marketplace (marketplace.databricks.com/api/2.0/public-marketplace-providers + public-marketplace-listings)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: CARTO
+    matched_domain: carto.com
+    matched_by: domain
+    listings: 10
+    sample_listings:
+    - Kontur - Population - Global (H3 res. 8, 2021)
+    - Overture Maps - Addresses
+    - Overture Maps - Base
+    - Overture Maps - Buildings
+    - Overture Maps - Divisions
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+  detected_by: sweep-data-marketplaces.py
+  detected: '2026-10-20'
+- partner_name: AWS Data Exchange
+  partner: amazon-data-exchange
+  partner_match: aggregator
+  type: marketplace
+  marketplace: amazon-data-exchange-marketplace
+  channel: distribution
+  relationship: distribution-channel
+  direction: third-party
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=64781f9c-84bc-4ed6-8ee4-45bed1a97b2d
+  category: data product listing
+  contract_reference:
+    register: AWS Data Exchange (AWS Marketplace discovery search, FULFILLMENT_OPTION_TYPE=DATA_EXCHANGE + seller-profile
+      sellerWebsiteUrl)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: CARTO
+    matched_domain: carto.com
+    matched_by: domain
+    listings: 23
+    sample_listings:
+    - ACS - Sociodemographics (USA, Census Block Groups, 2018)
+    - ACS - Sociodemographics (USA, Census Block Groups, 2019)
+    - AGS - Consumer Spending - Census Divisions
+    - AGS - Sociodemographics (Canada,  Census Divisions)
+    - AGS - Sociodemographics (USA, Census Block Groups)
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+  detected_by: sweep-data-marketplaces.py
+  detected: '2026-10-20'
+  publisher_verified:
+  - Deployed on AWS
+  - Standard Data Agreement
+source:
+- https://aws.amazon.com/marketplace/search/results?FULFILLMENT_OPTION_TYPE=DATA_EXCHANGE
+- https://marketplace.databricks.com/
